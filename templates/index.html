@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>GenNex Tech LLC</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --navy: #0d1b2a;
+    --navy-mid: #1a2f47;
+    --gold: #b89a5e;
+    --gold-light: #d4b87a;
+    --cream: #f5f1eb;
+    --cream-dark: #e8e1d4;
+    --text-light: #c9c0b0;
+  }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--navy); color: var(--cream); overflow-x: hidden; }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.25rem 4rem;
+    background: rgba(13,27,42,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(184,154,94,0.15);
+  }
+  .nav-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 600; letter-spacing: 0.08em; color: var(--gold-light); }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a { font-size: 0.8rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-light); text-decoration: none; transition: color 0.3s; }
+  .nav-links a:hover { color: var(--gold-light); }
+
+  /* HERO */
+  #hero {
+    min-height: 100vh; display: flex; flex-direction: column;
+    justify-content: center; align-items: center; text-align: center;
+    padding: 8rem 2rem 6rem; position: relative; overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute; inset: 0; z-index: 0;
+    background: radial-gradient(ellipse 70% 60% at 50% 40%, rgba(184,154,94,0.07) 0%, transparent 70%),
+                radial-gradient(ellipse 40% 30% at 20% 80%, rgba(26,47,71,0.8) 0%, transparent 60%);
+  }
+  .hero-line {
+    position: absolute; left: 50%; top: 0; bottom: 0; width: 1px;
+    background: linear-gradient(to bottom, transparent, rgba(184,154,94,0.2) 30%, rgba(184,154,94,0.2) 70%, transparent);
+    transform: translateX(-50%); z-index: 0;
+  }
+  .hero-content { position: relative; z-index: 1; max-width: 800px; }
+  .hero-eyebrow { font-size: 0.72rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.5rem; animation: fadeUp 0.8s ease both; }
+  .hero-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(3rem,7vw,6rem); font-weight: 300; line-height: 1.05; color: var(--cream); margin-bottom: 1.5rem; animation: fadeUp 0.8s 0.15s ease both; }
+  .hero-title span { color: var(--gold-light); font-weight: 600; }
+  .hero-sub { font-size: 1rem; font-weight: 300; color: var(--text-light); line-height: 1.8; max-width: 520px; margin: 0 auto 2.5rem; animation: fadeUp 0.8s 0.3s ease both; }
+  .btn-primary { display: inline-block; padding: 0.85rem 2.5rem; background: transparent; border: 1px solid var(--gold); color: var(--gold-light); font-family: 'DM Sans', sans-serif; font-size: 0.8rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; text-decoration: none; cursor: pointer; transition: background 0.3s, color 0.3s; animation: fadeUp 0.8s 0.45s ease both; }
+  .btn-primary:hover { background: var(--gold); color: var(--navy); }
+  .divider { display: flex; align-items: center; gap: 1rem; max-width: 200px; margin: 0 auto; padding: 3rem 0 0; }
+  .divider-line { flex: 1; height: 1px; background: rgba(184,154,94,0.3); }
+  .divider-diamond { width: 8px; height: 8px; background: var(--gold); transform: rotate(45deg); }
+
+  /* SECTIONS */
+  section { padding: 7rem 2rem; }
+  .section-inner { max-width: 1100px; margin: 0 auto; }
+  .section-label { font-size: 0.7rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); margin-bottom: 1rem; }
+  .section-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem,4vw,3.2rem); font-weight: 300; line-height: 1.15; color: var(--cream); margin-bottom: 1.5rem; }
+  .section-title strong { font-weight: 600; color: var(--gold-light); }
+
+  /* ABOUT */
+  #about { background: var(--navy-mid); }
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+  .about-text p { font-size: 0.95rem; color: var(--text-light); line-height: 1.9; margin-bottom: 1rem; }
+  .about-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+  .stat-card { padding: 1.5rem; border: 1px solid rgba(184,154,94,0.2); border-top: 2px solid var(--gold); }
+  .stat-number { font-family: 'Cormorant Garamond', serif; font-size: 2.8rem; font-weight: 600; color: var(--gold-light); line-height: 1; margin-bottom: 0.4rem; }
+  .stat-label { font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-light); }
+
+  /* SERVICES */
+  #services { background: var(--navy); }
+  .services-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem; margin-top: 3rem; }
+  .service-card { padding: 2rem 1.75rem; border: 1px solid rgba(184,154,94,0.15); border-bottom: 2px solid var(--gold); transition: border-color 0.3s, background 0.3s; }
+  .service-card:hover { border-color: rgba(184,154,94,0.4); background: rgba(184,154,94,0.04); }
+  .service-icon { width: 36px; height: 36px; margin-bottom: 1.25rem; color: var(--gold); }
+  .service-name { font-family: 'Cormorant Garamond', serif; font-size: 1.25rem; font-weight: 600; color: var(--cream); margin-bottom: 0.75rem; }
+  .service-desc { font-size: 0.85rem; color: var(--text-light); line-height: 1.8; }
+
+  /* CONTACT */
+  #contact { background: var(--navy-mid); }
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
+  .contact-info p { font-size: 0.95rem; color: var(--text-light); line-height: 1.9; margin-bottom: 2rem; }
+  .contact-detail { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem; font-size: 0.85rem; color: var(--cream-dark); }
+  .contact-detail svg { color: var(--gold); flex-shrink: 0; }
+  .contact-form { display: flex; flex-direction: column; gap: 1rem; }
+  .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+  .form-label { font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); }
+  .form-input, .form-textarea { background: rgba(255,255,255,0.04); border: 1px solid rgba(184,154,94,0.2); padding: 0.75rem 1rem; color: var(--cream); font-family: 'DM Sans', sans-serif; font-size: 0.9rem; outline: none; transition: border-color 0.3s; }
+  .form-input:focus, .form-textarea:focus { border-color: var(--gold); }
+  .form-textarea { resize: vertical; min-height: 120px; }
+  .form-submit { align-self: flex-start; padding: 0.85rem 2.5rem; background: transparent; border: 1px solid var(--gold); color: var(--gold-light); font-family: 'DM Sans', sans-serif; font-size: 0.8rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; cursor: pointer; transition: background 0.3s, color 0.3s; }
+  .form-submit:hover { background: var(--gold); color: var(--navy); }
+  .form-toast { margin-top: 0.75rem; font-size: 0.85rem; color: var(--gold-light); display: none; }
+
+  /* FOOTER */
+  footer { padding: 2rem 4rem; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(184,154,94,0.15); background: var(--navy); }
+  .footer-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-weight: 600; color: var(--gold); letter-spacing: 0.08em; }
+  .footer-copy { font-size: 0.75rem; color: var(--text-light); }
+
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    .services-grid { grid-template-columns: 1fr; }
+    footer { flex-direction: column; gap: 0.5rem; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">GenNex Tech</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-line"></div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">Next-Generation Technology Consulting</p>
+    <h1 class="hero-title">We Build the<br><span>Future</span> of Your<br>Business</h1>
+    <p class="hero-sub">GenNex Tech LLC partners with forward-thinking organizations to deliver transformative technology solutions that drive measurable results.</p>
+    <a href="#contact" class="btn-primary">Start a Conversation</a>
+    <div class="divider"><div class="divider-line"></div><div class="divider-diamond"></div><div class="divider-line"></div></div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="section-inner">
+    <div class="about-grid">
+      <div class="about-text">
+        <p class="section-label">Who We Are</p>
+        <h2 class="section-title">A Partner Built for<br><strong>Modern Challenges</strong></h2>
+        <p>GenNex Tech LLC is a boutique technology consulting firm dedicated to helping businesses harness the power of emerging technologies. We combine strategic insight with deep technical expertise to deliver solutions that matter.</p>
+        <p>From digital transformation roadmaps to hands-on implementation, our team works alongside yours — bringing clarity, precision, and a relentless focus on outcomes.</p>
+      </div>
+      <div class="about-stats">
+        <div class="stat-card"><div class="stat-number">50+</div><div class="stat-label">Projects Delivered</div></div>
+        <div class="stat-card"><div class="stat-number">98%</div><div class="stat-label">Client Satisfaction</div></div>
+        <div class="stat-card"><div class="stat-number">10+</div><div class="stat-label">Years Experience</div></div>
+        <div class="stat-card"><div class="stat-number">25+</div><div class="stat-label">Industries Served</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="services">
+  <div class="section-inner">
+    <p class="section-label">What We Offer</p>
+    <h2 class="section-title">Services Designed to<br><strong>Scale With You</strong></h2>
+    <div class="services-grid">
+      <div class="service-card">
+        <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+        <div class="service-name">Digital Transformation</div>
+        <p class="service-desc">We help organizations modernize their technology stack and culture, turning legacy systems into agile, future-ready platforms.</p>
+      </div>
+      <div class="service-card">
+        <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+        <div class="service-name">Cloud & Infrastructure</div>
+        <p class="service-desc">From cloud migration to DevOps architecture, we design resilient, cost-optimized infrastructure that powers growth.</p>
+      </div>
+      <div class="service-card">
+        <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07M8.46 8.46a5 5 0 0 0 0 7.07"/></svg>
+        <div class="service-name">AI & Data Strategy</div>
+        <p class="service-desc">Unlock competitive advantage through data. We build AI-powered pipelines, analytics platforms, and intelligent automation.</p>
+      </div>
+      <div class="service-card">
+        <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        <div class="service-name">Cybersecurity</div>
+        <p class="service-desc">Protect your assets and reputation with comprehensive security assessments, compliance frameworks, and ongoing monitoring.</p>
+      </div>
+      <div class="service-card">
+        <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        <div class="service-name">Technology Advisory</div>
+        <p class="service-desc">Strategic guidance for executives navigating technology investments, vendor selection, and long-term digital roadmaps.</p>
+      </div>
+      <div class="service-card">
+        <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+        <div class="service-name">Software Development</div>
+        <p class="service-desc">Custom software built to your exacting requirements — from enterprise applications to APIs, built with quality and speed.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="section-inner">
+    <div class="contact-grid">
+      <div class="contact-info">
+        <p class="section-label">Get In Touch</p>
+        <h2 class="section-title">Let's Build<br><strong>Something Great</strong></h2>
+        <p>Ready to elevate your technology strategy? Reach out to our team and let's explore how GenNex Tech can help you achieve your goals.</p>
+        <div class="contact-detail">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="e38a8d858ca384868d8d869b9786808bcd808c8e">[email&#160;protected]</a>
+        </div>
+        <div class="contact-detail">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.43 2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.9a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.73 16.92z"/></svg>
+          +1 (800) 000-0000
+        </div>
+        <div class="contact-detail">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          United States
+        </div>
+      </div>
+      <div>
+        <div class="contact-form" id="contactForm">
+          <div class="form-group">
+            <label class="form-label">Full Name</label>
+            <input class="form-input" type="text" id="name" placeholder="Jane Smith" />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Email</label>
+            <input class="form-input" type="email" id="email" placeholder="jane@company.com" />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Company</label>
+            <input class="form-input" type="text" id="company" placeholder="Acme Corp" />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Message</label>
+            <textarea class="form-textarea" id="message" placeholder="Tell us about your project..."></textarea>
+          </div>
+          <button class="form-submit" onclick="submitForm()">Send Message</button>
+          <p class="form-toast" id="toast"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">GenNex Tech LLC</div>
+  <div class="footer-copy">© 2026 GenNex Tech LLC. All rights reserved.</div>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+<script>
+async function submitForm() {
+  const payload = {
+    name:    document.getElementById("name").value.trim(),
+    email:   document.getElementById("email").value.trim(),
+    company: document.getElementById("company").value.trim(),
+    message: document.getElementById("message").value.trim(),
+  };
+  const toast = document.getElementById("toast");
+  try {
+    const res = await fetch("/contact", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    });
+    const data = await res.json();
+    toast.textContent = data.message || (res.ok ? "Message sent." : "Error sending message.");
+    toast.style.display = "block";
+    if (res.ok) {
+      document.getElementById("name").value = "";
+      document.getElementById("email").value = "";
+      document.getElementById("company").value = "";
+      document.getElementById("message").value = "";
+    }
+  } catch (err) {
+    toast.textContent = "Network error. Please try again.";
+    toast.style.display = "block";
+  }
+  setTimeout(() => { toast.style.display = "none"; }, 5000);
+}
+</script>
+</body>
+</html>
